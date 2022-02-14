@@ -1,0 +1,105 @@
+<div class="person">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Birth Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of personList">
+        <td>{{ person.name }}</td>
+        <td>{{ person.email }}</td>
+        <td>{{ person.birthDate | date: "dd/MM/yyyy" }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#detalhe"
+            (click)="selectPerson(person)"
+          >
+            <fa-icon [icon]="['fas', 'search']"></fa-icon> detail
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div
+  class="modal fade"
+  id="detalhe"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details Person</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h3>Person</h3>
+        <table class="table">
+          <tbody>
+            <tr class="table-rows">
+              <td class="header-dialog-colunm">Name:</td>
+              <td>
+                {{ personSelected?.name }}
+              </td>
+            </tr>
+            <tr class="table-rows">
+              <td class="header-dialog-colunm">E-mail:</td>
+              <td>
+                {{ personSelected?.email }}
+              </td>
+            </tr>
+            <tr class="table-rows">
+              <td class="header-dialog-colunm">Birth Date:</td>
+              <td>
+                {{ personSelected?.birthDate }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Address</h3>
+        <table class="table">
+          <tbody>
+            <tr class="table-rows">
+              <td class="header-dialog-colunm">Street:</td>
+              <td>
+                {{ personSelected?.address?.street }}
+              </td>
+            </tr>
+            <tr class="table-rows">
+              <td class="header-dialog-colunm">District:</td>
+              <td>
+                {{ personSelected?.address?.district }}
+              </td>
+            </tr>
+            <tr class="table-rows">
+              <td class="header-dialog-colunm">BNumber:</td>
+              <td>
+                {{ personSelected?.address?.number }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Sair
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
