@@ -14,6 +14,7 @@ import { TopoComponent } from './layout/topo/topo.component';
 import { RodapeComponent } from './layout/rodape/rodape.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { CoreModule } from './core/core.module';
+import { MenuComponent } from './layout/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CoreModule } from './core/core.module';
     TopoComponent,
     RodapeComponent,
     DashboardComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

@@ -114,6 +114,6 @@ export class PersonFormComponent extends BaseResourceFormComponent<Person> {
 
   protected editionPageTitle(): string {
     const personName = this.resource.name || '';
-    return 'Editing PErson: ' + personName;
+    return 'Editing Person: ' + personName;
   }
 }
