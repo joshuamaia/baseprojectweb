@@ -12,7 +12,6 @@ export class PersonListComponent
   extends BaseResourceListComponent<Person>
   implements OnInit
 {
-  personList: Person[] = [];
   personSelected: Person = {};
 
   constructor(private personService: PersonService) {
@@ -20,9 +19,12 @@ export class PersonListComponent
   }
 
   ngOnInit(): void {
-    this.personService.getAllPage(0, 10).subscribe((response) => {
-      this.personList = response;
-    });
+    this.personService.getAllPage(this.page, this.size).subscribe(
+      (resources) => {
+        this.resources = resources;
+      },
+      (error) => alert('Erro ao carregar a lista')
+    );
   }
 
   selectPerson(person: Person) {

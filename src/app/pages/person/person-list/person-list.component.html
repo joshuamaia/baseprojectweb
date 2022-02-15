@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let person of personList">
+      <tr *ngFor="let person of resources">
         <td>{{ person.name }}</td>
         <td>{{ person.email }}</td>
         <td>{{ person.birthDate | date: "dd/MM/yyyy" }}</td>
@@ -35,7 +35,7 @@
           </button>
           <a
             [routerLink]="[person.id, 'edit']"
-            class="btn btn-warning btn-sm botoes"
+            class="btn btn-secondary btn-sm botoes"
             ><fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</a
           >
           <button

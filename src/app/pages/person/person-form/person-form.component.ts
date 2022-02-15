@@ -25,7 +25,7 @@ export class PersonFormComponent extends BaseResourceFormComponent<Person> {
       name: [null, [Validators.required]],
       email: [null, [Validators.required]],
       birthDate: [null, [Validators.required]],
-      idAddress: [null, [Validators.required]],
+      idAddress: [null],
       street: [null, [Validators.required]],
       district: [null, [Validators.required]],
       number: [null, [Validators.required]],

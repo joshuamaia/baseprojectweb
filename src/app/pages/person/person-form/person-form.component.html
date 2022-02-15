@@ -1,91 +1,93 @@
-<app-bread-crumb
-  [items]="[{ text: 'Persons', link: '/persons' }, { text: pageTitle }]"
-></app-bread-crumb>
+<div class="person">
+  <app-bread-crumb
+    [items]="[{ text: 'Persons', link: '/persons' }, { text: pageTitle }]"
+  ></app-bread-crumb>
 
-<app-page-header
-  [page-title]="pageTitle"
-  button-text="<< Back"
-  button-link="/persons"
-  button-class="btn-light"
-></app-page-header>
+  <app-page-header
+    [page-title]="pageTitle"
+    button-text="<< Back"
+    button-link="/persons"
+    button-class="btn-light"
+  ></app-page-header>
 
-<form [formGroup]="resourceForm" (submit)="submitForm()">
-  <div class="card">
-    <div class="card-header">Person Informations</div>
+  <form [formGroup]="resourceForm" (submit)="submitForm()">
+    <div class="card">
+      <div class="card-header">Person Informations</div>
 
-    <div class="card-body">
-      <div class="row">
-        <div class="form-group col-md-4">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            formControlName="name"
-          />
-        </div>
-        <div class="form-group col-md-4">
-          <label for="email">E-mail</label>
-          <input
-            type="text"
-            class="form-control"
-            id="email"
-            formControlName="email"
-          />
-        </div>
-        <div class="form-group col-md-4">
-          <label for="birthdate">Birth Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="birthDate"
-            formControlName="birthDate"
-          />
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="email">E-mail</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              formControlName="email"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="birthdate">Birth Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="birthDate"
+              formControlName="birthDate"
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-header">Address Informations</div>
+    <div class="card">
+      <div class="card-header">Address Informations</div>
 
-    <div class="card-body">
-      <div class="row">
-        <div class="form-group col-md-4">
-          <label for="street">Street</label>
-          <input
-            type="text"
-            class="form-control"
-            id="street"
-            formControlName="street"
-          />
-        </div>
-        <div class="form-group col-md-4">
-          <label for="district">District</label>
-          <input
-            type="text"
-            class="form-control"
-            id="district"
-            formControlName="district"
-          />
-        </div>
-        <div class="form-group col-md-4">
-          <label for="number">Number</label>
-          <input
-            type="number"
-            class="form-control"
-            id="number"
-            formControlName="number"
-          />
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label for="street">Street</label>
+            <input
+              type="text"
+              class="form-control"
+              id="street"
+              formControlName="street"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="district">District</label>
+            <input
+              type="text"
+              class="form-control"
+              id="district"
+              formControlName="district"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="number">Number</label>
+            <input
+              type="number"
+              class="form-control"
+              id="number"
+              formControlName="number"
+            />
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <button
-    [disabled]="submittingForm || resourceForm.invalid"
-    type="submit"
-    class="btn btn-primary btn-lg float-right mt-3"
-  >
-    Salvar
-  </button>
-</form>
+    <button
+      [disabled]="submittingForm || resourceForm.invalid"
+      type="submit"
+      class="btn btn-primary btn-lg float-right mt-3"
+    >
+      Salvar
+    </button>
+  </form>
+</div>
