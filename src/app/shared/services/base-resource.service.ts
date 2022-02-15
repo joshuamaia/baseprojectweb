@@ -26,10 +26,10 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
   //     );
   // }
 
-  getAllPage(page: number, size: number): Observable<T[]> {
-    const url = `${this.apiPath}/${page}/${size}`;
+  getAllPage(page: number, size: number, wordSearch: string): Observable<any> {
+    const url = `${this.apiPath}/${page}/${size}/${wordSearch}`;
     console.log(url);
-    return this.http.get<T[]>(url);
+    return this.http.get<any>(url);
   }
 
   getById(id: number): Observable<T> {

@@ -7,48 +7,69 @@
     button-link="new"
     button-class="btn-success"
   ></app-page-header>
+  <div class="input-group mb-3 procurar-css">
+    <div class="input-group-prepend icon-grupo-pesquisar">
+      <span class="input-group-text" id="buscar">
+        <fa-icon [icon]="['fas', 'search']"></fa-icon
+      ></span>
+    </div>
+    <input
+      type="text"
+      class="form-control input-pesquisar"
+      placeholder="Search..."
+      aria-label="Search"
+      aria-describedby="buscar"
+      [(ngModel)]="wordSearch"
+      (keyup)="search()"
+    />
+  </div>
+  <div class="container-fluid tableskindiv">
+    <table class="tableskin">
+      <thead>
+        <tr class="bg-primary text-light">
+          <th>Name</th>
+          <th>E-mail</th>
+          <th>Birth Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of resources">
+          <td>{{ person.name }}</td>
+          <td>{{ person.email }}</td>
+          <td>{{ person.birthDate | date: "dd/MM/yyyy" }}</td>
 
-  <table class="tableskin">
-    <thead>
-      <tr class="bg-primary text-light">
-        <th>Name</th>
-        <th>E-mail</th>
-        <th>Birth Date</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let person of resources">
-        <td>{{ person.name }}</td>
-        <td>{{ person.email }}</td>
-        <td>{{ person.birthDate | date: "dd/MM/yyyy" }}</td>
-
-        <td class="acoes">
-          <button
-            type="button"
-            class="btn btn-primary btn-sm botoes"
-            data-bs-toggle="modal"
-            data-bs-target="#detalhe"
-            (click)="selectPerson(person)"
-          >
-            <fa-icon [icon]="['fas', 'search']"></fa-icon> Detail
-          </button>
-          <a
-            [routerLink]="[person.id, 'edit']"
-            class="btn btn-secondary btn-sm botoes"
-            ><fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</a
-          >
-          <button
-            (click)="deleteResource(person)"
-            class="btn btn-danger btn-sm botoes"
-          >
-            <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
+          <td class="acoes">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm botoes"
+              data-bs-toggle="modal"
+              data-bs-target="#detalhe"
+              (click)="selectPerson(person)"
+            >
+              <fa-icon [icon]="['fas', 'search']"></fa-icon> Detail
+            </button>
+            <a
+              [routerLink]="[person.id, 'edit']"
+              class="btn btn-secondary btn-sm botoes"
+              ><fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</a
+            >
+            <button
+              (click)="deleteResource(person)"
+              class="btn btn-danger btn-sm botoes"
+            >
+              <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p-paginator
+      [rows]="size"
+      [totalRecords]="totalElementos"
+      (onPageChange)="paginate($event)"
+    ></p-paginator>
+  </div>
   <div
     class="modal fade"
     id="detalhe"

@@ -14,11 +14,13 @@
   margin-right: 4px;
 }
 
-.tableskin {
-  width: 100%;
+.tableskindiv {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  border-collapse: collapse;
+}
+
+.tableskin {
+  width: 100%;
 }
 thead {
   background-color: rgba($color: #3f51b5, $alpha: 0.4);
@@ -27,14 +29,14 @@ th {
   padding: 10px !important;
 }
 tbody {
-  background-color: rgba($color: #3f51b5, $alpha: 0.15);
+  background-color: rgba($color: #3f51b5, $alpha: 0.35);
 }
 td {
   padding: 15px;
   text-align: left;
 }
 tbody tr:nth-child(even) {
-  background-color: #fff;
+  background-color: rgba($color: #3f51b5, $alpha: 0.08);
 }
 .listra {
   background: cyan;
