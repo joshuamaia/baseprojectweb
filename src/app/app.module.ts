@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { TopoComponent } from './layout/topo/topo.component';
 import { RodapeComponent } from './layout/rodape/rodape.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DashboardComponent } from './layout/dashboard/dashboard.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgHttpLoaderModule.forRoot(),
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

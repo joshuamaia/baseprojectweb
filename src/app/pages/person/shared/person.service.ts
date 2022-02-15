@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Person } from './person.model';
 
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { UtilService } from 'src/app/shared/util.service';
+import { UtilService } from 'src/app/shared/services/util.service';
+import { BaseResourceService } from 'src/app/shared/services/base-resource.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PersonService {
-  constructor(private http: HttpClient) {}
+export class PersonService extends BaseResourceService<Person> {
+  constructor(protected injector: Injector) {
+    super(`${UtilService.BASE_URL}/persons`, injector, Person.fromJson);
+  }
 
-  getAll(page: number, size: number): Observable<Person[]> {
+  getAllPage(page: number, size: number): Observable<Person[]> {
     const url = `${UtilService.BASE_URL}/persons/${page}/${size}`;
     return this.http.get<Person[]>(url);
   }

@@ -1,7 +1,16 @@
 <div class="person">
-  <table class="table">
+  <app-bread-crumb [items]="[{ text: 'Persons' }]"></app-bread-crumb>
+
+  <app-page-header
+    page-title="Persons"
+    button-text="+ New Person"
+    button-link="new"
+    button-class="btn-success"
+  ></app-page-header>
+
+  <table class="tableskin">
     <thead>
-      <tr>
+      <tr class="bg-primary text-light">
         <th>Name</th>
         <th>E-mail</th>
         <th>Birth Date</th>
@@ -13,92 +22,108 @@
         <td>{{ person.name }}</td>
         <td>{{ person.email }}</td>
         <td>{{ person.birthDate | date: "dd/MM/yyyy" }}</td>
-        <td>
+
+        <td class="acoes">
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-primary btn-sm botoes"
             data-bs-toggle="modal"
             data-bs-target="#detalhe"
             (click)="selectPerson(person)"
           >
-            <fa-icon [icon]="['fas', 'search']"></fa-icon> detail
+            <fa-icon [icon]="['fas', 'search']"></fa-icon> Detail
+          </button>
+          <a
+            [routerLink]="[person.id, 'edit']"
+            class="btn btn-warning btn-sm botoes"
+            ><fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</a
+          >
+          <button
+            (click)="deleteResource(person)"
+            class="btn btn-danger btn-sm botoes"
+          >
+            <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
 
-<div
-  class="modal fade"
-  id="detalhe"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Details Person</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <h3>Person</h3>
-        <table class="table">
-          <tbody>
-            <tr class="table-rows">
-              <td class="header-dialog-colunm">Name:</td>
-              <td>
-                {{ personSelected?.name }}
-              </td>
-            </tr>
-            <tr class="table-rows">
-              <td class="header-dialog-colunm">E-mail:</td>
-              <td>
-                {{ personSelected?.email }}
-              </td>
-            </tr>
-            <tr class="table-rows">
-              <td class="header-dialog-colunm">Birth Date:</td>
-              <td>
-                {{ personSelected?.birthDate }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <h3>Address</h3>
-        <table class="table">
-          <tbody>
-            <tr class="table-rows">
-              <td class="header-dialog-colunm">Street:</td>
-              <td>
-                {{ personSelected?.address?.street }}
-              </td>
-            </tr>
-            <tr class="table-rows">
-              <td class="header-dialog-colunm">District:</td>
-              <td>
-                {{ personSelected?.address?.district }}
-              </td>
-            </tr>
-            <tr class="table-rows">
-              <td class="header-dialog-colunm">Number:</td>
-              <td>
-                {{ personSelected?.address?.number }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Sair
-        </button>
+  <div
+    class="modal fade"
+    id="detalhe"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Details Person</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h3>Person</h3>
+          <table class="table">
+            <tbody>
+              <tr class="table-rows">
+                <td class="header-dialog-colunm">Name:</td>
+                <td>
+                  {{ personSelected?.name }}
+                </td>
+              </tr>
+              <tr class="table-rows">
+                <td class="header-dialog-colunm">E-mail:</td>
+                <td>
+                  {{ personSelected?.email }}
+                </td>
+              </tr>
+              <tr class="table-rows">
+                <td class="header-dialog-colunm">Birth Date:</td>
+                <td>
+                  {{ personSelected?.birthDate }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Address</h3>
+          <table class="table">
+            <tbody>
+              <tr class="table-rows">
+                <td class="header-dialog-colunm">Street:</td>
+                <td>
+                  {{ personSelected?.address?.street }}
+                </td>
+              </tr>
+              <tr class="table-rows">
+                <td class="header-dialog-colunm">District:</td>
+                <td>
+                  {{ personSelected?.address?.district }}
+                </td>
+              </tr>
+              <tr class="table-rows">
+                <td class="header-dialog-colunm">Number:</td>
+                <td>
+                  {{ personSelected?.address?.number }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Sair
+          </button>
+        </div>
       </div>
     </div>
   </div>

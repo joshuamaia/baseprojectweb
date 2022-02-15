@@ -10,10 +10,11 @@ import {
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import { fontAwesomeIcons } from '../config/font-awesome-icons';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [PersonListComponent, PersonFormComponent],
-  imports: [CommonModule, FontAwesomeModule, PersonRoutingModule],
+  imports: [CommonModule, SharedModule, FontAwesomeModule, PersonRoutingModule],
 })
 export class PersonModule {
   constructor(private fontAwesomeLibrary: FaIconLibrary) {
