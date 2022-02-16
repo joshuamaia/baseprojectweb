@@ -89,52 +89,61 @@
           ></button>
         </div>
         <div class="modal-body">
-          <h3>Person</h3>
-          <table class="table">
-            <tbody>
-              <tr class="table-rows">
-                <td class="header-dialog-colunm">Name:</td>
-                <td>
-                  {{ personSelected?.name }}
-                </td>
-              </tr>
-              <tr class="table-rows">
-                <td class="header-dialog-colunm">E-mail:</td>
-                <td>
-                  {{ personSelected?.email }}
-                </td>
-              </tr>
-              <tr class="table-rows">
-                <td class="header-dialog-colunm">Birth Date:</td>
-                <td>
-                  {{ personSelected?.birthDate }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <h3>Address</h3>
-          <table class="table">
-            <tbody>
-              <tr class="table-rows">
-                <td class="header-dialog-colunm">Street:</td>
-                <td>
-                  {{ personSelected?.address?.street }}
-                </td>
-              </tr>
-              <tr class="table-rows">
-                <td class="header-dialog-colunm">District:</td>
-                <td>
-                  {{ personSelected?.address?.district }}
-                </td>
-              </tr>
-              <tr class="table-rows">
-                <td class="header-dialog-colunm">Number:</td>
-                <td>
-                  {{ personSelected?.address?.number }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="card">
+            <div class="card-header">Person Informations</div>
+            <div class="card-body">
+              <table class="table">
+                <tbody>
+                  <tr class="table-rows">
+                    <td class="header-dialog-colunm">Name:</td>
+                    <td>
+                      {{ personSelected?.name }}
+                    </td>
+                  </tr>
+                  <tr class="table-rows">
+                    <td class="header-dialog-colunm">E-mail:</td>
+                    <td>
+                      {{ personSelected?.email }}
+                    </td>
+                  </tr>
+                  <tr class="table-rows">
+                    <td class="header-dialog-colunm">Birth Date:</td>
+                    <td>
+                      {{ personSelected?.birthDate }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">Address Informations</div>
+
+            <div class="card-body">
+              <table class="table">
+                <tbody>
+                  <tr class="table-rows">
+                    <td class="header-dialog-colunm">Street:</td>
+                    <td>
+                      {{ personSelected?.address?.street }}
+                    </td>
+                  </tr>
+                  <tr class="table-rows">
+                    <td class="header-dialog-colunm">District:</td>
+                    <td>
+                      {{ personSelected?.address?.district }}
+                    </td>
+                  </tr>
+                  <tr class="table-rows">
+                    <td class="header-dialog-colunm">Number:</td>
+                    <td>
+                      {{ personSelected?.address?.number }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button
