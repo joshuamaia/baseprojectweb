@@ -5,9 +5,10 @@
 
   <app-page-header
     [page-title]="pageTitle"
-    button-text="<< Back"
+    button-text="Back"
+    [button-fa]="['fas', 'backward']"
     button-link="/persons"
-    button-class="btn-light"
+    button-class="btn-primary"
   ></app-page-header>
 
   <form [formGroup]="resourceForm" (submit)="submitForm()">
@@ -109,13 +110,14 @@
         </div>
       </div>
     </div>
-
-    <button
-      [disabled]="submittingForm || resourceForm.invalid"
-      type="submit"
-      class="btn btn-primary btn-lg float-right mt-3"
-    >
-      Salvar
-    </button>
+    <div class="button-save">
+      <button
+        [disabled]="submittingForm || resourceForm.invalid"
+        type="submit"
+        class="btn btn-primary btn-lg float-right mt-3"
+      >
+        <fa-icon [icon]="['fas', 'save']"></fa-icon> Salvar
+      </button>
+    </div>
   </form>
 </div>

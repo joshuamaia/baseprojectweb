@@ -6,7 +6,7 @@
   </div>
   <div *ngIf="showButton" class="col-md-3 button-new">
     <a [routerLink]="buttonLink" class="btn" [ngClass]="buttonClass">
-      {{ buttonText }}
+      <fa-icon [icon]="buttonFa"></fa-icon> {{ buttonText }}
     </a>
   </div>
 </div>

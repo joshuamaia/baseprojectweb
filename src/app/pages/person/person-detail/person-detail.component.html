@@ -1,0 +1,89 @@
+<div
+  class="modal fade"
+  id="detail"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details Person</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-header">Person Informations</div>
+          <div class="card-body">
+            <table class="table">
+              <tbody>
+                <tr class="table-rows">
+                  <td class="header-dialog-colunm">Name:</td>
+                  <td>
+                    {{ personSelected?.name }}
+                  </td>
+                </tr>
+                <tr class="table-rows">
+                  <td class="header-dialog-colunm">E-mail:</td>
+                  <td>
+                    {{ personSelected?.email }}
+                  </td>
+                </tr>
+                <tr class="table-rows">
+                  <td class="header-dialog-colunm">Birth Date:</td>
+                  <td>
+                    {{ personSelected?.birthDate }}
+                  </td>
+                </tr>
+                <tr class="table-rows">
+                  <td class="header-dialog-colunm">Gender:</td>
+                  <td>
+                    {{ personSelected?.gender?.description }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Address Informations</div>
+
+          <div class="card-body">
+            <table class="table">
+              <tbody>
+                <tr class="table-rows">
+                  <td class="header-dialog-colunm">Street:</td>
+                  <td>
+                    {{ personSelected?.address?.street }}
+                  </td>
+                </tr>
+                <tr class="table-rows">
+                  <td class="header-dialog-colunm">District:</td>
+                  <td>
+                    {{ personSelected?.address?.district }}
+                  </td>
+                </tr>
+                <tr class="table-rows">
+                  <td class="header-dialog-colunm">Number:</td>
+                  <td>
+                    {{ personSelected?.address?.number }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Sair
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

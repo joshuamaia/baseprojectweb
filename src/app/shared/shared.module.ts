@@ -8,6 +8,11 @@ import { FormFieldErrorComponent } from './components/form-field-error/form-fiel
 import { ServerErrorMessagesComponent } from './components/server-error-messages/server-error-messages.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import { fontAwesomeIcons } from '../pages/config/font-awesome-icons';
 
 @NgModule({
   imports: [
@@ -17,6 +22,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PaginatorModule,
     NgSelectModule,
     FormsModule,
+    FontAwesomeModule,
   ],
   declarations: [
     BreadCrumbComponent,
@@ -38,6 +44,15 @@ import { NgSelectModule } from '@ng-select/ng-select';
     PaginatorModule,
     NgSelectModule,
     FormsModule,
+    FontAwesomeModule,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+  constructor(private fontAwesomeLibrary: FaIconLibrary) {
+    this.configureFontAwesome();
+  }
+
+  private configureFontAwesome() {
+    this.fontAwesomeLibrary.addIcons(...fontAwesomeIcons);
+  }
+}
