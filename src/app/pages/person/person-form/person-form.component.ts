@@ -3,6 +3,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 import { Address } from '../shared/address.model';
+import Gender from '../shared/gender.model';
 import { Person } from '../shared/person.model';
 import { PersonService } from '../shared/person.service';
 
@@ -12,6 +13,7 @@ import { PersonService } from '../shared/person.service';
   styleUrls: ['./person-form.component.scss'],
 })
 export class PersonFormComponent extends BaseResourceFormComponent<Person> {
+  genders: Gender[] = [];
   constructor(
     protected personService: PersonService,
     protected injector: Injector
@@ -25,6 +27,7 @@ export class PersonFormComponent extends BaseResourceFormComponent<Person> {
       name: [null, [Validators.required]],
       email: [null, [Validators.required]],
       birthDate: [null, [Validators.required]],
+      gender: [null, [Validators.required]],
       idAddress: [null],
       street: [null, [Validators.required]],
       district: [null, [Validators.required]],
@@ -43,6 +46,7 @@ export class PersonFormComponent extends BaseResourceFormComponent<Person> {
         .subscribe(
           (resource: any) => {
             this.resource = resource;
+
             this.resourceForm.controls.street.patchValue(
               this.resource.address?.street
             );
@@ -55,6 +59,12 @@ export class PersonFormComponent extends BaseResourceFormComponent<Person> {
             this.resourceForm.controls.idAddress.patchValue(
               this.resource.address?.id
             );
+
+            this.resourceForm.controls.gender.patchValue(this.resource.gender);
+
+            this.personService.getGenders().subscribe((response) => {
+              this.genders = response;
+            });
             this.resourceForm.patchValue(resource); // binds loaded resource data to resourceForm
           },
           (error: any) =>

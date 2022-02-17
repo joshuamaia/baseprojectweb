@@ -34,7 +34,7 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
   async deleteResource(resource: T) {
     const confirmacao = await swal.fire({
       title: 'Delete',
-      text: 'Do you want really delete the item??',
+      text: 'Do you want really delete the item?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

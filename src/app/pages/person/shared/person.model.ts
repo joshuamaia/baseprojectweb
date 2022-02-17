@@ -1,6 +1,7 @@
 import { Address } from './address.model';
 
 import { BaseResourceModel } from '../../../shared/models/base-resource.model';
+import Geder from './gender.model';
 
 export class Person extends BaseResourceModel {
   constructor(
@@ -8,6 +9,7 @@ export class Person extends BaseResourceModel {
     public name?: string,
     public email?: string,
     public birthDate?: Date,
+    public gender?: Geder,
     public address?: Address
   ) {
     super();

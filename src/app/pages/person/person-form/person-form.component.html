@@ -16,7 +16,7 @@
 
       <div class="card-body">
         <div class="row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label for="name">Name</label>
             <input
               type="text"
@@ -25,7 +25,7 @@
               formControlName="name"
             />
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label for="email">E-mail</label>
             <input
               type="text"
@@ -34,7 +34,35 @@
               formControlName="email"
             />
           </div>
-          <div class="form-group col-md-4">
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="gender">Gender</label>
+            <ng-select
+              id="gender"
+              [items]="genders"
+              class="NgSelect"
+              formControlName="gender"
+              labelForId="input-tipo"
+              appearance="outline"
+              [searchable]="true"
+            >
+              <ng-template ng-label-tmp let-item="item">
+                {{ item.description }}
+              </ng-template>
+              <ng-template
+                ng-option-tmp
+                let-item="item"
+                let-index="index"
+                let-search="searchTerm"
+              >
+                {{ item.description }}
+              </ng-template>
+            </ng-select>
+          </div>
+          <div class="form-group col-md-6">
             <label for="birthdate">Birth Date</label>
             <input
               type="date"
