@@ -117,7 +117,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
   }
 
   protected actionsForSuccess(resource: T) {
-    swal.fire(`Success`, `Solicitação processada com sucesso!`, 'success');
+    swal.fire(`Success`, `Request processed successfully!`, 'success');
 
     const baseComponentPath: string =
       this.route?.snapshot?.parent?.url[0].path || '';
@@ -131,11 +131,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
   }
 
   protected actionsForError(error: any) {
-    swal.fire(
-      `Erro`,
-      `Ocorreu um erro ao processar a sua solicitação!`,
-      'error'
-    );
+    swal.fire(`Erro`, `There was an error processing your request!`, 'error');
 
     this.submittingForm = false;
 
