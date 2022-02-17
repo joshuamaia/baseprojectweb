@@ -15,7 +15,7 @@ export class PersonService extends BaseResourceService<Person> {
   }
 
   getGenders(): Observable<Gender[]> {
-    const url = `${UtilService.BASE_URL}/persons/gender`;
+    const url = `${UtilService.BASE_URL}/enums/gender`;
 
     return this.http.get<Gender[]>(url);
   }
