@@ -12,7 +12,10 @@ import { PersonService } from '../shared/person.service';
   templateUrl: './person-form.component.html',
   styleUrls: ['./person-form.component.scss'],
 })
-export class PersonFormComponent extends BaseResourceFormComponent<Person> {
+export class PersonFormComponent
+  extends BaseResourceFormComponent<Person>
+  implements OnInit
+{
   genders: Gender[] = [];
   constructor(
     protected personService: PersonService,
@@ -28,98 +31,20 @@ export class PersonFormComponent extends BaseResourceFormComponent<Person> {
       email: [null, [Validators.required]],
       birthDate: [null, [Validators.required]],
       gender: [null, [Validators.required]],
-      idAddress: [null],
-      street: [null, [Validators.required]],
-      district: [null, [Validators.required]],
-      number: [null, [Validators.required]],
+      address: this.formBuilder.group({
+        id: [null],
+        street: [null, [Validators.required]],
+        district: [null, [Validators.required]],
+        number: [null, [Validators.required]],
+      }),
     });
   }
 
-  loadResource() {
-    if (this.currentAction == 'edit') {
-      this.route.paramMap
-        .pipe(
-          switchMap((params: any) =>
-            this.resourceService.getById(+params.get('id'))
-          )
-        )
-        .subscribe(
-          (resource: any) => {
-            this.resource = resource;
-
-            this.resourceForm.controls.street.patchValue(
-              this.resource.address?.street
-            );
-            this.resourceForm.controls.district.patchValue(
-              this.resource.address?.district
-            );
-            this.resourceForm.controls.number.patchValue(
-              this.resource.address?.number
-            );
-            this.resourceForm.controls.idAddress.patchValue(
-              this.resource.address?.id
-            );
-
-            this.resourceForm.controls.gender.patchValue(this.resource.gender);
-
-            this.personService.getGenders().subscribe((response) => {
-              this.genders = response;
-            });
-            this.resourceForm.patchValue(resource); // binds loaded resource data to resourceForm
-          },
-          (error: any) =>
-            alert('Ocorreu um erro no servidor, tente mais tarde.')
-        );
-    } else {
-      this.personService.getGenders().subscribe((response) => {
-        this.genders = response;
-      });
-    }
-  }
-
-  createResource() {
-    const resource: Person = this.jsonDataToResourceFn(this.resourceForm.value);
-
-    const street = this.resourceForm.controls.street.value;
-    const idAddress = this.resourceForm.controls.idAddress.value;
-    const number = this.resourceForm.controls.number.value;
-    const district = this.resourceForm.controls.district.value;
-
-    const address: Address = new Address();
-
-    address.id = idAddress;
-    address.street = street;
-    address.district = district;
-    address.number = number;
-
-    resource.address = address;
-
-    this.resourceService.create(resource).subscribe(
-      (resource) => this.actionsForSuccess(resource),
-      (error) => this.actionsForError(error)
-    );
-  }
-
-  updateResource() {
-    const resource: Person = this.jsonDataToResourceFn(this.resourceForm.value);
-
-    const street = this.resourceForm.controls.street.value;
-    const idAddress = this.resourceForm.controls.idAddress.value;
-    const number = this.resourceForm.controls.number.value;
-    const district = this.resourceForm.controls.district.value;
-
-    const address: Address = new Address();
-
-    address.id = idAddress;
-    address.street = street;
-    address.district = district;
-    address.number = number;
-
-    resource.address = address;
-    this.resourceService.update(resource).subscribe(
-      (resource) => this.actionsForSuccess(resource),
-      (error) => this.actionsForError(error)
-    );
+  ngOnInit() {
+    super.ngOnInit();
+    this.personService.getGenders().subscribe((response) => {
+      this.genders = response;
+    });
   }
 
   protected creationPageTitle(): string {
