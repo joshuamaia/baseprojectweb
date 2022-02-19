@@ -70,6 +70,10 @@ export class PersonFormComponent extends BaseResourceFormComponent<Person> {
           (error: any) =>
             alert('Ocorreu um erro no servidor, tente mais tarde.')
         );
+    } else {
+      this.personService.getGenders().subscribe((response) => {
+        this.genders = response;
+      });
     }
   }
 

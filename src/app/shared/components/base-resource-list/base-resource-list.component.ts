@@ -31,6 +31,27 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
       );
   }
 
+  paginate(event: any) {
+    //console.log(event);
+    this.resourceService
+      .getAllPage(event.page, event.rows, this.wordSearch)
+      .subscribe((response) => {
+        this.page = response;
+        this.resources = this.page.content;
+        this.totalElementos = this.page.totalElements;
+      });
+  }
+
+  search() {
+    this.resourceService
+      .getAllPage(this.pageNumber, this.size, this.wordSearch)
+      .subscribe((response) => {
+        this.page = response;
+        this.resources = this.page.content;
+        this.totalElementos = this.page.totalElements;
+      });
+  }
+
   async deleteResource(resource: T) {
     const confirmacao = await swal.fire({
       title: 'Delete',
@@ -46,9 +67,15 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel>
     if (confirmacao?.isConfirmed) {
       this.resourceService.delete(resource?.id || 0).subscribe(
         () =>
-          (this.resources = this.resources.filter(
-            (element) => element?.id != resource?.id
-          )),
+          (this.resources = this.resources.filter((element) => {
+            this.resourceService
+              .getAllPage(this.pageNumber, this.size, this.wordSearch)
+              .subscribe((response) => {
+                this.page = response;
+                this.resources = this.page.content;
+                this.totalElementos = this.page.totalElements;
+              });
+          })),
         () => swal.fire('Erro', 'Error the try delete!', 'error')
       );
     }
