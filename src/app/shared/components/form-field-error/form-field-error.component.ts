@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./form-field-error.component.css'],
 })
 export class FormFieldErrorComponent implements OnInit {
-  @Input('form-control') formControl: FormControl = new FormControl();
+  @Input('form-control') formControl: FormControl = {} as FormControl;
 
   constructor() {}
 
@@ -27,7 +27,7 @@ export class FormFieldErrorComponent implements OnInit {
   }
 
   private getErrorMessage(): string | null {
-    if (this.formControl?.errors?.required) return 'dado obrigatório';
+    if (this.formControl?.errors?.required) return 'Data is required';
     else if (this.formControl?.errors?.email)
       return 'formato de email inválido';
     else if (this.formControl?.errors?.minlength) {
