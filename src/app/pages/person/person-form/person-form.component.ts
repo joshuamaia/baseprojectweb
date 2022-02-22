@@ -1,8 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { switchMap } from 'rxjs/operators';
+import { Validators } from '@angular/forms';
+
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
-import { Address } from '../shared/address.model';
 import Gender from '../shared/gender.model';
 import { Person } from '../shared/person.model';
 import { PersonService } from '../shared/person.service';
@@ -28,7 +27,7 @@ export class PersonFormComponent
     this.resourceForm = this.formBuilder.group({
       id: [null],
       name: [null, [Validators.required]],
-      email: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
       birthDate: [null, [Validators.required]],
       gender: [null, [Validators.required]],
       address: this.formBuilder.group({

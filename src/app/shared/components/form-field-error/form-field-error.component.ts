@@ -28,14 +28,13 @@ export class FormFieldErrorComponent implements OnInit {
 
   private getErrorMessage(): string | null {
     if (this.formControl?.errors?.required) return 'Data is required';
-    else if (this.formControl?.errors?.email)
-      return 'formato de email inválido';
+    else if (this.formControl?.errors?.email) return 'Invalid email format';
     else if (this.formControl?.errors?.minlength) {
       const requiredLength = this.formControl.errors.minlength.requiredLength;
-      return `deve ter no mínimo ${requiredLength} caracteres`;
+      return `Must be at least ${requiredLength} characters`;
     } else if (this.formControl?.errors?.maxlength) {
       const requiredLength = this.formControl.errors.maxlength.requiredLength;
-      return `deve ter no máximo ${requiredLength} caracteres`;
+      return `Must be at most ${requiredLength} characters`;
     }
     return null;
   }
