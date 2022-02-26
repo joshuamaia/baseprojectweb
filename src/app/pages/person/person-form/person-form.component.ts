@@ -1,5 +1,6 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Subscriber } from 'rxjs';
 
 import { BaseResourceFormComponent } from 'src/app/shared/components/base-resource-form/base-resource-form.component';
 import Gender from '../shared/gender.model';
@@ -13,9 +14,10 @@ import { PersonService } from '../shared/person.service';
 })
 export class PersonFormComponent
   extends BaseResourceFormComponent<Person>
-  implements OnInit
+  implements OnInit, OnDestroy
 {
   genders: Gender[] = [];
+
   constructor(
     protected personService: PersonService,
     protected injector: Injector
@@ -41,9 +43,15 @@ export class PersonFormComponent
 
   ngOnInit() {
     super.ngOnInit();
-    this.personService.getGenders().subscribe((response) => {
-      this.genders = response;
-    });
+    this.subscribeGeneral.add(
+      this.personService.getGenders().subscribe((response) => {
+        this.genders = response;
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
   }
 
   protected creationPageTitle(): string {

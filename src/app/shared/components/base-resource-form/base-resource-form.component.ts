@@ -12,16 +12,19 @@ import { BaseResourceService } from '../../services/base-resource.service';
 
 import { switchMap } from 'rxjs/operators';
 import swal from 'sweetalert2';
+import { Subscriber } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 @Directive()
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
-  implements OnInit, AfterContentChecked
+  implements OnInit, AfterContentChecked, OnDestroy
 {
   currentAction: string = '';
   resourceForm: FormGroup;
   pageTitle: string = '';
   serverErrorMessages: string[] = [];
   submittingForm: boolean = false;
+  subscribeGeneral: Subscriber<any> = new Subscriber();
 
   protected route: ActivatedRoute;
   protected router: Router;
@@ -101,18 +104,22 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
   protected createResource() {
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
 
-    this.resourceService.create(resource).subscribe(
-      (resource) => this.actionsForSuccess(resource),
-      (error) => this.actionsForError(error)
+    this.subscribeGeneral.add(
+      this.resourceService.create(resource).subscribe(
+        (resource) => this.actionsForSuccess(resource),
+        (error) => this.actionsForError(error)
+      )
     );
   }
 
   protected updateResource() {
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
 
-    this.resourceService.update(resource).subscribe(
-      (resource) => this.actionsForSuccess(resource),
-      (error) => this.actionsForError(error)
+    this.subscribeGeneral.add(
+      this.resourceService.update(resource).subscribe(
+        (resource) => this.actionsForSuccess(resource),
+        (error) => this.actionsForError(error)
+      )
     );
   }
 
@@ -144,4 +151,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel>
   }
 
   protected abstract buildResourceForm(): void;
+
+  ngOnDestroy() {
+    this.subscribeGeneral.unsubscribe();
+  }
 }
