@@ -31,7 +31,14 @@
           <th>Name</th>
           <th>E-mail</th>
           <th>Birth Date</th>
-          <th></th>
+          <th class="actions actions-header">
+            <button
+              (click)="downloadReportPdf()"
+              class="btn btn-danger btn-sm botoes"
+            >
+              <fa-icon [icon]="['fas', 'file-pdf']"></fa-icon> PDF
+            </button>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +47,7 @@
           <td>{{ person.email }}</td>
           <td>{{ person.birthDate | date: "dd/MM/yyyy" }}</td>
 
-          <td class="acoes">
+          <td class="actions">
             <button
               type="button"
               class="btn btn-primary btn-sm botoes"
