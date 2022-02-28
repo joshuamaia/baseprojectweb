@@ -27,8 +27,8 @@ export class PersonListComponent
     this.personSelected = person;
   }
 
-  downloadFile(data: any, filename: string) {
-    const blob = new Blob([data], { type: 'application/pdf' });
+  downloadFile(data: any, filename: string, type: string) {
+    const blob = new Blob([data], { type: type });
     // const url = window.URL.createObjectURL(blob);
     // window.open(url);
     saveAs(blob, filename);
@@ -36,7 +36,12 @@ export class PersonListComponent
 
   downloadReportPdf() {
     this.personService.downloadReportPdf().subscribe((response) => {
-      this.downloadFile(response, 'person.pdf');
+      this.downloadFile(response, 'person.pdf', 'application/pdf');
+    });
+  }
+  downloadReportCsv() {
+    this.personService.downloadReportCsv().subscribe((response) => {
+      this.downloadFile(response, 'person.csv', 'text/csv');
     });
   }
 }

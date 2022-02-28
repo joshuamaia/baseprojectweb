@@ -31,4 +31,15 @@ export class PersonService extends BaseResourceService<Person> {
       responseType: 'blob',
     });
   }
+
+  downloadReportCsv(): Observable<any> {
+    let headers = new HttpHeaders();
+
+    headers = headers.set('Accept', 'text/plain');
+
+    return this.http.get(`${UtilService.BASE_URL}/persons-reports/csv`, {
+      headers: headers,
+      responseType: 'blob',
+    });
+  }
 }

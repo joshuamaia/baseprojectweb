@@ -8,6 +8,7 @@ import {
   faBackward,
   faSave,
   faFilePdf,
+  faFileCsv,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
@@ -20,4 +21,5 @@ export const fontAwesomeIcons = [
   faBackward,
   faSave,
   faFilePdf,
+  faFileCsv,
 ];
