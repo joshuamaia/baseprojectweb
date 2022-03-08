@@ -40,7 +40,14 @@
           <td>{{ expenseControl.person.name }}</td>
           <td>{{ expenseControl.description }}</td>
           <td>{{ expenseControl.dateExpense | date: "dd/MM/yyyy" }}</td>
-          <td>{{ expenseControl.value | currency: "BRL":true }}</td>
+          <td
+            [ngClass]="{
+              expense: expenseControl.expense.description === 'Expense',
+              revenue: expenseControl.expense.description === 'Revenue'
+            }"
+          >
+            {{ expenseControl.value | currency: "BRL":true }}
+          </td>
 
           <td class="actions">
             <button
