@@ -37,7 +37,7 @@
                 <tr class="table-rows">
                   <td class="header-dialog-colunm">Birth Date:</td>
                   <td>
-                    {{ personSelected?.birthDate }}
+                    {{ personSelected?.birthDate | date: "dd/MM/yyyy" }}
                   </td>
                 </tr>
                 <tr class="table-rows">

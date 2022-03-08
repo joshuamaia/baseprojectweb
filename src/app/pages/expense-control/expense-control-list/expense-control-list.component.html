@@ -1,9 +1,9 @@
 <div class="list">
-  <app-bread-crumb [items]="[{ text: 'Persons' }]"></app-bread-crumb>
+  <app-bread-crumb [items]="[{ text: 'Expense Control' }]"></app-bread-crumb>
 
   <app-page-header
-    page-title="Persons"
-    button-text="New Person"
+    page-title="Expense Control"
+    button-text="New Expense Control"
     [button-fa]="['fas', 'plus']"
     button-link="new"
     button-class="btn-success"
@@ -28,30 +28,19 @@
     <table class="tableskin">
       <thead>
         <tr class="bg-primary text-light">
-          <th>Name</th>
-          <th>E-mail</th>
-          <th>Birth Date</th>
-          <th class="actions actions-header">
-            <button
-              (click)="downloadReportCsv()"
-              class="btn btn-success btn-sm botoes"
-            >
-              <fa-icon [icon]="['fas', 'file-csv']"></fa-icon> CSV
-            </button>
-            <button
-              (click)="downloadReportPdf()"
-              class="btn btn-danger btn-sm botoes"
-            >
-              <fa-icon [icon]="['fas', 'file-pdf']"></fa-icon> PDF
-            </button>
-          </th>
+          <th>Person</th>
+          <th>Description</th>
+          <th>Expense Date</th>
+          <th>Value</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let person of resources">
-          <td>{{ person.name }}</td>
-          <td>{{ person.email }}</td>
-          <td>{{ person.birthDate | date: "dd/MM/yyyy" }}</td>
+        <tr *ngFor="let expenseControl of resources">
+          <td>{{ expenseControl.person.name }}</td>
+          <td>{{ expenseControl.description }}</td>
+          <td>{{ expenseControl.dateExpense | date: "dd/MM/yyyy" }}</td>
+          <td>{{ expenseControl.value | currency: "BRL":true }}</td>
 
           <td class="actions">
             <button
@@ -59,17 +48,17 @@
               class="btn btn-primary btn-sm botoes"
               data-bs-toggle="modal"
               data-bs-target="#detail"
-              (click)="selectPerson(person)"
+              (click)="selectExpenseControl(expenseControl)"
             >
               <fa-icon [icon]="['fas', 'search']"></fa-icon> Detail
             </button>
             <a
-              [routerLink]="[person.id, 'edit']"
+              [routerLink]="[expenseControl.id, 'edit']"
               class="btn btn-secondary btn-sm botoes"
               ><fa-icon [icon]="['fas', 'edit']"></fa-icon> Edit</a
             >
             <button
-              (click)="deleteResource(person)"
+              (click)="deleteResource(expenseControl)"
               class="btn btn-danger btn-sm botoes"
             >
               <fa-icon [icon]="['fas', 'trash']"></fa-icon> Delete
@@ -84,5 +73,7 @@
       (onPageChange)="paginate($event)"
     ></p-paginator>
   </div>
-  <app-person-detail [personSelected]="personSelected"></app-person-detail>
+  <app-expense-control-detail
+    [expenseControlSelected]="expenseControlSelected"
+  ></app-expense-control-detail>
 </div>

@@ -12,6 +12,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/person/person.module').then((m) => m.PersonModule),
   },
+  {
+    path: 'expense-control',
+    loadChildren: () =>
+      import('./pages/expense-control/expense-control.module').then(
+        (m) => m.ExpenseControlModule
+      ),
+  },
 ];
 
 @NgModule({

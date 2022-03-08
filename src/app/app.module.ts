@@ -16,6 +16,11 @@ import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { CoreModule } from './core/core.module';
 import { MenuComponent } from './layout/menu/menu.component';
 
+import { LOCALE_ID } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localePt);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +39,12 @@ import { MenuComponent } from './layout/menu/menu.component';
     NgHttpLoaderModule.forRoot(),
     CoreModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR',
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

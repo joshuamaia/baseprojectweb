@@ -17,14 +17,14 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     this.http = injector.get(HttpClient);
   }
 
-  // getAll(): Observable<T[]> {
-  //   return this.http
-  //     .get(this.apiPath)
-  //     .pipe(
-  //       map(this.jsonDataToResources.bind(this)),
-  //       catchError(this.handleError)
-  //     );
-  // }
+  getAll(): Observable<T[]> {
+    return this.http
+      .get<any>(`${this.apiPath}/list`)
+      .pipe(
+        map(this.jsonDataToResources.bind(this)),
+        catchError(this.handleError)
+      );
+  }
 
   getAllPage(page: number, size: number, wordSearch: string): Observable<any> {
     const url = `${this.apiPath}/${page}/${size}/${wordSearch}`;

@@ -1,0 +1,131 @@
+<div class="formcss">
+  <app-bread-crumb
+    [items]="[
+      { text: 'Expense Control', link: '/expense-control' },
+      { text: pageTitle }
+    ]"
+  ></app-bread-crumb>
+
+  <app-page-header
+    [page-title]="pageTitle"
+    button-text="Back"
+    [button-fa]="['fas', 'backward']"
+    button-link="/expense-control"
+    button-class="btn-primary"
+  ></app-page-header>
+
+  <form [formGroup]="resourceForm" (submit)="submitForm()">
+    <div class="card">
+      <div class="card-header">Expense Control Informations</div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="person">Person</label>
+            <ng-select
+              id="person"
+              [items]="persons"
+              class="NgSelect"
+              formControlName="person"
+              labelForId="input-tipo"
+              appearance="outline"
+              [searchable]="true"
+            >
+              <ng-template ng-label-tmp let-item="item">
+                {{ item.name }}
+              </ng-template>
+              <ng-template
+                ng-option-tmp
+                let-item="item"
+                let-index="index"
+                let-search="searchTerm"
+              >
+                {{ item.name }}
+              </ng-template>
+            </ng-select>
+            <app-form-field-error
+              [form-control]="resourceForm?.get('person')"
+            ></app-form-field-error>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              formControlName="description"
+            />
+            <app-form-field-error
+              [form-control]="resourceForm?.get('description')"
+            ></app-form-field-error>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label for="expense">expense</label>
+            <ng-select
+              id="expense"
+              [items]="expenses"
+              class="NgSelect"
+              formControlName="expense"
+              labelForId="input-tipo"
+              appearance="outline"
+              [searchable]="true"
+            >
+              <ng-template ng-label-tmp let-item="item">
+                {{ item.description }}
+              </ng-template>
+              <ng-template
+                ng-option-tmp
+                let-item="item"
+                let-index="index"
+                let-search="searchTerm"
+              >
+                {{ item.description }}
+              </ng-template>
+            </ng-select>
+            <app-form-field-error
+              [form-control]="resourceForm?.get('expense')"
+            ></app-form-field-error>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="value">Value</label>
+            <input
+              type="number"
+              class="form-control"
+              id="value"
+              formControlName="value"
+            />
+            <app-form-field-error
+              [form-control]="resourceForm?.get('value')"
+            ></app-form-field-error>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="dateExpense">Expense Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="dateExpense"
+              formControlName="dateExpense"
+            />
+            <app-form-field-error
+              [form-control]="resourceForm?.get('dateExpense')"
+            ></app-form-field-error>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-save">
+      <button
+        [disabled]="submittingForm || resourceForm.invalid"
+        type="submit"
+        class="btn btn-primary btn-lg float-right mt-3"
+      >
+        <fa-icon [icon]="['fas', 'save']"></fa-icon> Salvar
+      </button>
+    </div>
+  </form>
+</div>
