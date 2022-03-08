@@ -15,6 +15,7 @@ import { RodapeComponent } from './layout/rodape/rodape.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { CoreModule } from './core/core.module';
 import { MenuComponent } from './layout/menu/menu.component';
+import { ChartModule } from 'angular-highcharts';
 
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
@@ -38,6 +39,7 @@ registerLocaleData(localePt);
     HttpClientModule,
     NgHttpLoaderModule.forRoot(),
     CoreModule,
+    ChartModule,
   ],
   providers: [
     {

@@ -1,0 +1,38 @@
+<div class="chartcss">
+  <div class="card">
+    <div class="card-header">Expense Control Chart</div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label for="person">Person</label>
+          <ng-select
+            id="person"
+            [items]="persons"
+            class="NgSelect"
+            [(ngModel)]="personSelected"
+            labelForId="input-tipo"
+            appearance="outline"
+            [searchable]="true"
+            (change)="fillChart()"
+          >
+            <ng-template ng-label-tmp let-item="item">
+              {{ item.name }}
+            </ng-template>
+            <ng-template
+              ng-option-tmp
+              let-item="item"
+              let-index="index"
+              let-search="searchTerm"
+            >
+              {{ item.name }}
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+      <div class="row">
+        <div [chart]="chart"></div>
+      </div>
+    </div>
+  </div>
+</div>
