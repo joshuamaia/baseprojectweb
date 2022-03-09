@@ -5,6 +5,7 @@ import { PersonService } from '../../person/shared/person.service';
 import { ExpenseControlService } from '../shared/expense-control.service';
 import { Chart } from 'angular-highcharts';
 import { ExpenseControl } from '../shared/expense-control.model';
+import { ExpenseSumDto } from '../shared/expense-sum-dto.model';
 
 @Component({
   selector: 'app-expense-control-chart',
@@ -14,7 +15,7 @@ import { ExpenseControl } from '../shared/expense-control.model';
 export class ExpenseControlChartComponent implements OnInit, OnDestroy {
   subscribeGeneral: Subscriber<any> = new Subscriber();
   persons: Person[] = [];
-  expenseControls: ExpenseControl[] = [];
+  expenseControlsSum: ExpenseSumDto[] = [];
   personSelected: Person = new Person();
   chart: any;
 
@@ -27,47 +28,28 @@ export class ExpenseControlChartComponent implements OnInit, OnDestroy {
     this.persons = await this.personervice.getAll().toPromise();
     if (this.persons?.length > 0) {
       this.personSelected = this.persons[0];
+      this.fillChart();
     }
-    this.subscribeGeneral.add(
-      this.expenseControlService.getAll().subscribe((response) => {
-        this.expenseControls = response;
-        this.fillChart();
-      })
-    );
   }
 
   ngOnDestroy() {
     this.subscribeGeneral.unsubscribe();
   }
 
-  fillChart() {
-    const filterExpenseControlsExpense = this.expenseControls
-      .filter(
-        (ec) =>
-          ec.person?.id === this.personSelected.id &&
-          ec.expense?.description === 'Expense'
-      )
-      .map((ec) => ec.value);
-    const filterExpenseControlsRevenue = this.expenseControls
-      .filter(
-        (ec) =>
-          ec.person?.id === this.personSelected.id &&
-          ec.expense?.description === 'Revenue'
-      )
-      .map((ec) => ec.value);
-    const expense = filterExpenseControlsExpense.reduce(
-      (acc, ec) => (acc || 0) + (ec || 0),
-      0
-    );
-    const revenue = filterExpenseControlsRevenue.reduce(
-      (acc, ec) => (acc || 0) + (ec || 0),
-      0
-    );
-    console.log(this.personSelected);
-    console.log(filterExpenseControlsExpense);
-    console.log(filterExpenseControlsRevenue);
-    console.log(expense);
-    console.log(revenue);
+  async fillChart() {
+    if (!this.personSelected) {
+      return;
+    }
+    this.expenseControlsSum = await this.expenseControlService
+      .getExpenseSumByPersonId(this.personSelected?.id)
+      .toPromise();
+    const filterExpenseControlsExpense = this.expenseControlsSum
+      .filter((ecs) => ecs.expense === 'EXPENSE')
+      .map((ecs) => ecs.value);
+    const filterExpenseControlsRevenue = this.expenseControlsSum
+      .filter((ecs) => ecs.expense === 'REVENUE')
+      .map((ecs) => ecs.value);
+
     this.chart = new Chart({
       chart: {
         type: 'line',
@@ -83,13 +65,13 @@ export class ExpenseControlChartComponent implements OnInit, OnDestroy {
           color: '#FF0000',
           type: 'column',
           name: 'Expense',
-          data: [expense || 0],
+          data: [filterExpenseControlsExpense || 0],
         },
         {
           color: '#008000',
           type: 'column',
           name: 'Revenue',
-          data: [revenue || 0],
+          data: [filterExpenseControlsRevenue || 0],
         },
       ],
     });

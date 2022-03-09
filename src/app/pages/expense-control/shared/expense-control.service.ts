@@ -6,6 +6,7 @@ import { BaseResourceService } from 'src/app/shared/services/base-resource.servi
 import { HttpHeaders } from '@angular/common/http';
 import { ExpenseControl } from './expense-control.model';
 import Expense from './expense.model';
+import { ExpenseSumDto } from './expense-sum-dto.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +24,13 @@ export class ExpenseControlService extends BaseResourceService<ExpenseControl> {
     const url = `${UtilService.BASE_URL}/enums/expense`;
 
     return this.http.get<Expense[]>(url);
+  }
+
+  getExpenseSumByPersonId(
+    personID: number | undefined
+  ): Observable<ExpenseSumDto[]> {
+    const url = `${UtilService.BASE_URL}/expense-controls/expense-sum/${personID}`;
+
+    return this.http.get<ExpenseSumDto[]>(url);
   }
 }
