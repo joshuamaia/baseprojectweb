@@ -4,6 +4,9 @@
   border-top: 2px solid #00bfff;
   clear: both;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .titulo {
