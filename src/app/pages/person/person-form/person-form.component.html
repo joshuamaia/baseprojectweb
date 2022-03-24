@@ -79,6 +79,7 @@
               class="form-control"
               id="birthDate"
               formControlName="birthDate"
+              [max]="maxBirthDate()"
             />
             <app-form-field-error
               [form-control]="resourceForm?.get('birthDate')"

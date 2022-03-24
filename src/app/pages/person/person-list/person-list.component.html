@@ -25,26 +25,27 @@
     />
   </div>
   <div class="container-fluid tableskindiv">
+    <div class="actions actions-header">
+      <button
+        (click)="downloadReportCsv()"
+        class="btn btn-success btn-sm botoes"
+      >
+        <fa-icon [icon]="['fas', 'file-csv']"></fa-icon> CSV
+      </button>
+      <button
+        (click)="downloadReportPdf()"
+        class="btn btn-danger btn-sm botoes"
+      >
+        <fa-icon [icon]="['fas', 'file-pdf']"></fa-icon> PDF
+      </button>
+    </div>
     <table class="tableskin">
       <thead>
         <tr class="bg-primary text-light">
           <th>Name</th>
           <th>E-mail</th>
           <th>Birth Date</th>
-          <th class="actions actions-header">
-            <button
-              (click)="downloadReportCsv()"
-              class="btn btn-success btn-sm botoes"
-            >
-              <fa-icon [icon]="['fas', 'file-csv']"></fa-icon> CSV
-            </button>
-            <button
-              (click)="downloadReportPdf()"
-              class="btn btn-danger btn-sm botoes"
-            >
-              <fa-icon [icon]="['fas', 'file-pdf']"></fa-icon> PDF
-            </button>
-          </th>
+          <th class="actions">Actions</th>
         </tr>
       </thead>
       <tbody>

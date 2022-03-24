@@ -54,6 +54,10 @@ export class PersonFormComponent
     super.ngOnDestroy();
   }
 
+  maxBirthDate() {
+    return new Date().toISOString().split('T')[0];
+  }
+
   protected creationPageTitle(): string {
     return 'Add new Person';
   }
