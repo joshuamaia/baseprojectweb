@@ -35,9 +35,11 @@ export class PersonListComponent
   }
 
   downloadReportPdf() {
-    this.personService.downloadReportPdf().subscribe((response) => {
-      this.downloadFile(response, 'person.pdf', 'application/pdf');
-    });
+    this.personService
+      .downloadReportPdf('person_report')
+      .subscribe((response) => {
+        this.downloadFile(response, 'person.pdf', 'application/pdf');
+      });
   }
   downloadReportCsv() {
     this.personService.downloadReportCsv().subscribe((response) => {

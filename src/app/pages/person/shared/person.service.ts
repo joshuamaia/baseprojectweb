@@ -21,15 +21,18 @@ export class PersonService extends BaseResourceService<Person> {
     return this.http.get<Gender[]>(url);
   }
 
-  downloadReportPdf(): Observable<any> {
+  downloadReportPdf(nameReport: string): Observable<any> {
     let headers = new HttpHeaders();
 
     headers = headers.set('Accept', 'application/pdf');
 
-    return this.http.get(`${UtilService.BASE_URL}/persons-reports/pdf`, {
-      headers: headers,
-      responseType: 'blob',
-    });
+    return this.http.get(
+      `${UtilService.BASE_URL}/persons-reports/pdf/${nameReport}`,
+      {
+        headers: headers,
+        responseType: 'blob',
+      }
+    );
   }
 
   downloadReportCsv(): Observable<any> {
