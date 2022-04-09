@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { ExpenseControl } from '../shared/expense-control.model';
 import { ExpenseControlService } from '../shared/expense-control.service';
-import { saveAs } from 'file-saver';
-import { PersonService } from '../../person/shared/person.service';
+
+import { DownloadService } from 'src/app/shared/services/download.service';
 
 @Component({
   selector: 'app-expense-control-list',
@@ -18,7 +18,7 @@ export class ExpenseControlListComponent
 
   constructor(
     private expenseControlService: ExpenseControlService,
-    private personService: PersonService
+    private downloadService: DownloadService
   ) {
     super(expenseControlService);
   }
@@ -31,18 +31,15 @@ export class ExpenseControlListComponent
     this.expenseControlSelected = expenseControl;
   }
 
-  downloadFile(data: any, filename: string, type: string) {
-    const blob = new Blob([data], { type: type });
-    // const url = window.URL.createObjectURL(blob);
-    // window.open(url);
-    saveAs(blob, filename);
-  }
-
   downloadReportPdf() {
-    this.personService
+    this.downloadService
       .downloadReportPdf('expense_report')
       .subscribe((response) => {
-        this.downloadFile(response, 'expense.pdf', 'application/pdf');
+        this.downloadService.downloadFile(
+          response,
+          'expense.pdf',
+          'application/pdf'
+        );
       });
   }
 }

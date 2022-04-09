@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BaseResourceListComponent } from 'src/app/shared/components/base-resource-list/base-resource-list.component';
 import { Person } from '../shared/person.model';
 import { PersonService } from '../shared/person.service';
-import { saveAs } from 'file-saver';
+
+import { DownloadService } from '../../../shared/services/download.service';
 
 @Component({
   selector: 'app-person-list',
@@ -15,7 +16,10 @@ export class PersonListComponent
 {
   personSelected: Person = {};
 
-  constructor(private personService: PersonService) {
+  constructor(
+    private personService: PersonService,
+    private downloadService: DownloadService
+  ) {
     super(personService);
   }
 
@@ -27,23 +31,20 @@ export class PersonListComponent
     this.personSelected = person;
   }
 
-  downloadFile(data: any, filename: string, type: string) {
-    const blob = new Blob([data], { type: type });
-    // const url = window.URL.createObjectURL(blob);
-    // window.open(url);
-    saveAs(blob, filename);
-  }
-
   downloadReportPdf() {
-    this.personService
+    this.downloadService
       .downloadReportPdf('person_report')
       .subscribe((response) => {
-        this.downloadFile(response, 'person.pdf', 'application/pdf');
+        this.downloadService.downloadFile(
+          response,
+          'person.pdf',
+          'application/pdf'
+        );
       });
   }
   downloadReportCsv() {
-    this.personService.downloadReportCsv().subscribe((response) => {
-      this.downloadFile(response, 'person.csv', 'text/csv');
+    this.downloadService.downloadReportCsv().subscribe((response) => {
+      this.downloadService.downloadFile(response, 'person.csv', 'text/csv');
     });
   }
 }
