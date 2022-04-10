@@ -15,6 +15,8 @@ export class PersonListComponent
   implements OnInit
 {
   personSelected: Person = {};
+  name: string | undefined;
+  email: string | undefined;
 
   constructor(
     private personService: PersonService,
@@ -29,6 +31,16 @@ export class PersonListComponent
 
   selectPerson(person: Person) {
     this.personSelected = person;
+  }
+
+  filter() {
+    this.personService
+      .getAllFilter(this.pageNumber, this.size, this.name, this.email)
+      .subscribe((response) => {
+        this.page = response;
+        this.resources = this.page.content;
+        this.totalElementos = this.page.totalElements;
+      });
   }
 
   downloadReportPdf() {
