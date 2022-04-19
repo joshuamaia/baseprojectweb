@@ -34,13 +34,28 @@ export class PersonListComponent
   }
 
   filter() {
-    this.personService
-      .getAllFilter(this.pageNumber, this.size, this.name, this.email)
-      .subscribe((response) => {
-        this.page = response;
-        this.resources = this.page.content;
-        this.totalElementos = this.page.totalElements;
-      });
+    this.subscribeGeneral.add(
+      this.personService
+        .getAllFilter(this.pageNumber, this.size, this.name, this.email)
+        .subscribe((response) => {
+          this.page = response;
+          this.resources = this.page.content;
+          this.totalElementos = this.page.totalElements;
+        })
+    );
+  }
+
+  paginate(event: any) {
+    //console.log(event);
+    this.subscribeGeneral.add(
+      this.personService
+        .getAllFilter(event.page, event.rows, this.name, this.email)
+        .subscribe((response) => {
+          this.page = response;
+          this.resources = this.page.content;
+          this.totalElementos = this.page.totalElements;
+        })
+    );
   }
 
   downloadReportPdf() {

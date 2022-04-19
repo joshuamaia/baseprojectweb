@@ -15,6 +15,9 @@ export class ExpenseControlListComponent
   implements OnInit
 {
   expenseControlSelected: ExpenseControl = {};
+  name: string | undefined;
+  email: string | undefined;
+  description: string | undefined;
 
   constructor(
     private expenseControlService: ExpenseControlService,
@@ -29,6 +32,43 @@ export class ExpenseControlListComponent
 
   selectExpenseControl(expenseControl: ExpenseControl) {
     this.expenseControlSelected = expenseControl;
+  }
+
+  filter() {
+    this.subscribeGeneral.add(
+      this.expenseControlService
+        .getAllFilter(
+          this.pageNumber,
+          this.size,
+          this.name,
+          this.email,
+          this.description
+        )
+        .subscribe((response) => {
+          this.page = response;
+          this.resources = this.page.content;
+          this.totalElementos = this.page.totalElements;
+        })
+    );
+  }
+
+  paginate(event: any) {
+    //console.log(event);
+    this.subscribeGeneral.add(
+      this.expenseControlService
+        .getAllFilter(
+          event.page,
+          event.rows,
+          this.name,
+          this.email,
+          this.description
+        )
+        .subscribe((response) => {
+          this.page = response;
+          this.resources = this.page.content;
+          this.totalElementos = this.page.totalElements;
+        })
+    );
   }
 
   downloadReportPdf() {

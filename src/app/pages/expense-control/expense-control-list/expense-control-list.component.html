@@ -8,21 +8,50 @@
     button-link="new"
     button-class="btn-success"
   ></app-page-header>
-  <div class="input-group mb-3 procurar-css">
-    <div class="input-group-prepend icon-grupo-pesquisar">
-      <span class="input-group-text" id="buscar">
-        <fa-icon [icon]="['fas', 'search']"></fa-icon
-      ></span>
+  <div class="card">
+    <div class="card-header">Expense Control Filter</div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="description"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="name">Person Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [(ngModel)]="name"
+          />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="email">Person E-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            [(ngModel)]="email"
+          />
+        </div>
+        <div class="form-group col-md-3 button-search">
+          <button
+            id="search"
+            type="button"
+            class="btn btn-primary btn-sm botoes"
+            (click)="filter()"
+          >
+            <fa-icon [icon]="['fas', 'search']"></fa-icon> Search
+          </button>
+        </div>
+      </div>
     </div>
-    <input
-      type="text"
-      class="form-control input-pesquisar"
-      placeholder="Search..."
-      aria-label="Search"
-      aria-describedby="buscar"
-      [(ngModel)]="wordSearch"
-      (keyup)="search()"
-    />
   </div>
   <div class="container-fluid tableskindiv">
     <div class="actions actions-header">

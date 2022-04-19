@@ -14,7 +14,12 @@
 .actions-header {
   padding: 10px;
   background: #fff;
-  border: 2px solid rgba($color: #3f51b5, $alpha: 0.4);
+}
+
+.button-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .botoes {
