@@ -20,6 +20,7 @@ import { ChartModule } from 'angular-highcharts';
 import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { SharedModule } from './shared/shared.module';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -40,6 +41,7 @@ registerLocaleData(localePt);
     NgHttpLoaderModule.forRoot(),
     CoreModule,
     ChartModule,
+    SharedModule,
   ],
   providers: [
     {

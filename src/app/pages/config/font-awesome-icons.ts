@@ -1,3 +1,4 @@
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
   faSearch,
   faQuestion,
@@ -22,4 +23,6 @@ export const fontAwesomeIcons = [
   faSave,
   faFilePdf,
   faFileCsv,
+  faLinkedin,
+  faGithub,
 ];

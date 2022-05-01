@@ -9,6 +9,27 @@
   justify-content: center;
 }
 
+a {
+  color: #ffffff;
+}
+
+a:hover {
+  color: #00bfff;
+}
+
+.centralizar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .titulo {
   color: #fff;
+  font-size: 25px;
+}
+
+.autor {
+  margin-left: 20px;
+  color: white;
+  font-size: 18px;
 }
