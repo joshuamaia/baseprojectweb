@@ -26,6 +26,12 @@ export class ExpenseControlService extends BaseResourceService<ExpenseControl> {
     return this.http.get<Expense[]>(url);
   }
 
+  getExpenseSumByTotal(): Observable<ExpenseSumDto[]> {
+    const url = `${UtilService.BASE_URL}/expense-controls/expense-sum`;
+
+    return this.http.get<ExpenseSumDto[]>(url);
+  }
+
   getExpenseSumByPersonId(
     personID: number | undefined
   ): Observable<ExpenseSumDto[]> {

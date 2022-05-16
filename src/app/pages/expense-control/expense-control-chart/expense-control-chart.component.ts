@@ -16,6 +16,11 @@ export class ExpenseControlChartComponent implements OnInit, OnDestroy {
   subscribeGeneral: Subscriber<any> = new Subscriber();
   persons: Person[] = [];
   expenseControlsSum: ExpenseSumDto[] = [];
+  expenseControlsSumTotal: ExpenseSumDto[] = [];
+  expenseTotal: number | undefined;
+  revenueTotal: number | undefined;
+  grandTotal: number | undefined;
+
   personSelected: Person = new Person();
   chart: any;
 
@@ -30,10 +35,24 @@ export class ExpenseControlChartComponent implements OnInit, OnDestroy {
       this.personSelected = this.persons[0];
       this.fillChart();
     }
+    this.loadSumExpenseTotal();
   }
 
   ngOnDestroy() {
     this.subscribeGeneral.unsubscribe();
+  }
+
+  async loadSumExpenseTotal() {
+    this.expenseControlsSumTotal = await this.expenseControlService
+      .getExpenseSumByTotal()
+      .toPromise();
+    this.expenseTotal = this.expenseControlsSumTotal
+      .filter((ecs) => ecs.expense === 'EXPENSE')
+      .map((ecs) => ecs.value)[0];
+    this.revenueTotal = this.expenseControlsSumTotal
+      .filter((ecs) => ecs.expense === 'REVENUE')
+      .map((ecs) => ecs.value)[0];
+    this.grandTotal = (this.revenueTotal || 0) - (this.expenseTotal || 0);
   }
 
   async fillChart() {

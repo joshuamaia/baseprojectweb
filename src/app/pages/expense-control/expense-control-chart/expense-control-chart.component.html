@@ -1,4 +1,27 @@
 <div class="chartcss">
+  <div class="row">
+    <div class="col-md-4">
+      <app-kpi
+        kpiClass="expense"
+        expenseType="Total Revenue"
+        [text]="expenseTotal"
+      ></app-kpi>
+    </div>
+    <div class="col-md-4">
+      <app-kpi
+        kpiClass="revenue"
+        expenseType="Total Expense"
+        [text]="revenueTotal"
+      ></app-kpi>
+    </div>
+    <div class="col-md-4">
+      <app-kpi
+        kpiClass="total"
+        expenseType="Grand total"
+        [text]="grandTotal"
+      ></app-kpi>
+    </div>
+  </div>
   <div class="card">
     <div class="card-header">Expense Control Chart</div>
 

@@ -13,6 +13,7 @@ import {
   FontAwesomeModule,
 } from '@fortawesome/angular-fontawesome';
 import { fontAwesomeIcons } from '../pages/config/font-awesome-icons';
+import { KpiComponent } from './components/kpi/kpi.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { fontAwesomeIcons } from '../pages/config/font-awesome-icons';
     PageHeaderComponent,
     FormFieldErrorComponent,
     ServerErrorMessagesComponent,
+    KpiComponent,
   ],
   exports: [
     // shared modules
@@ -41,6 +43,7 @@ import { fontAwesomeIcons } from '../pages/config/font-awesome-icons';
     PageHeaderComponent,
     FormFieldErrorComponent,
     ServerErrorMessagesComponent,
+    KpiComponent,
     PaginatorModule,
     NgSelectModule,
     FormsModule,
